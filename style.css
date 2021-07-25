@@ -1,0 +1,340 @@
+body {
+  margin: 0;
+}
+
+.sheet-page-wrapper {
+  padding: 20px;
+}
+.sheet-character-sheet {
+    padding-bottom: 50px;
+}
+label {
+  font-size: 16px;
+  display: inline-block;
+  width: auto;
+}
+
+.sheet-small {
+  font-size: 12px;
+}
+.sheet-roll-type {
+    align-items: center;
+} 
+
+.sheet-roll-type label {
+    margin-bottom: 0px;
+}
+.sheet-roll-type label:last-of-type {
+    margin-bottom: 0px;
+    margin-left: auto;
+}
+.sheet-roll-type h4 {
+    margin-right: 10px;
+}
+
+.charsheet .sheet-logo {
+  width: 100px;
+  margin-right: 20px;
+  line-height: 0;
+}
+.charsheet .sheet-logo img {
+  display: block;
+}
+.charsheet .sheet-character-information {
+  width: calc(100% - 120px);
+}
+.sheet-name {
+    display: flex;
+}
+
+.sheet-character-information label {
+    padding-right: 0;
+}
+.sheet-character-information select {
+    width: 100%;
+    margin-bottom: 0;
+}
+.sheet-row-no-wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-bottom: 5px;
+}
+.sheet-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.sheet-flex-container.sheet-no-wrap {
+  flex-wrap: nowrap;
+  display: flex;
+}
+.sheet-value {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(33.333% - 6.667px);
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+.sheet-value label {
+    width: 100%;
+}
+.sheet-value input[name=attr_protocol_name] {
+    width: calc(37.5% - 5px);
+    margin-right: 10px;
+}
+.sheet-value input[name=attr_protocol_effect] {
+    width: calc(62.5% - 5px);
+}
+.sheet-value input {
+    display: block;
+    width: 100%;
+}
+.sheet-value:last-of-type {
+    margin-right: 0;
+}
+.sheet-row {
+    align-items: center;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.sheet-hard-points {
+    margin-bottom: 25px;
+}
+.sheet-hard-point {
+    margin-right: 10px;
+}
+.sheet-modifications, .sheet-plugins {
+    width: 100%;
+}
+.charsheet .sheet-tab-group .sheet-attacks .sheet-row label {
+    width: auto;
+    padding-right: 5px;
+}
+.sheet-attacks h3:nth-of-type(n+2) {
+    margin-top: 30px;
+}
+.sheet-progression .sheet-table label {
+    font-size: 14px;
+    padding-right: 5px !important;
+}
+.sheet-progression .sheet-table .sheet-flex-container {
+    margin-bottom: 5px;
+    align-items: center;
+}
+.sheet-progression .sheet-table.sheet-missions input[type=number] {
+    width: 3em;
+}
+.sheet-progression .sheet-table {
+    margin-right: 7.5px;
+    width: calc(33.333% - 5px);
+}
+.sheet-progression .sheet-table:last-of-type {
+    margin-right: 0;
+}
+div[data-groupname="repeating_attack"] .repitem {
+    margin-bottom: 20px;
+}
+div[data-groupname="repeating_attack"] .repitem  select{
+     width: auto;
+    margin-bottom: 0;
+}
+div[data-groupname="repeating_attack"] .repitem input[name="attr_weapon_name"] {
+    width: 120px;
+}
+div[data-groupname="repeating_attack"] .repitem input[name="attr_weapon_qualities"] {
+    width: 400px;
+}
+div[data-groupname="repeating_explosive"] .repitem textarea {
+    margin-top: 5px;
+}
+div[data-groupname="repeating_explosive"] .repitem select {
+    width: auto;
+    margin-bottom: 0;
+}
+div[data-groupname="repeating_mod"] .repitem, div[data-groupname="repeating_plugin"] .repitem, div[data-groupname="repeating_equipment"] .repitem {
+    margin-right: 7.5px;
+    width: calc(33.333% - 5px);
+    margin-bottom: 20px;
+}
+div[data-groupname="repeating_mod"] .repitem label, div[data-groupname="repeating_plugin"] .repitem label, div[data-groupname="repeating_equipment"] label {
+    padding-right: 5px;
+}
+div[data-groupname="repeating_mod"] .repitem label, div[data-groupname="repeating_mod"] .repitem select, div[data-groupname="repeating_plugin"] .repitem label, div[data-groupname="repeating_plugin"] .repitem select, div[data-groupname="repeating_equipment"] .repitem label, div[data-groupname="repeating_equipment"] .repitem select {
+   width: auto;
+   margin-bottom: 0;
+}
+div[data-groupname="repeating_mod"] .repitem .sheet-row, div[data-groupname="repeating_plugin"] .repitem .sheet-flex-container, div[data-groupname="repeating_equipment"] .repitem .sheet-flex-container {
+    align-items: center;
+    margin-bottom: 5px;
+}
+div[data-groupname="repeating_mod"] .repitem .sheet-flex-container {
+    margin-bottom: 5px;
+    align-items: center;
+}
+div[data-groupname="repeating_mod"] .repitem .sheet-row:last-child, div[data-groupname="repeating_plugin"] .repitem .sheet-row:last-child, div[data-groupname="repeating_equipment"] .repitem .sheet-row:last-child {
+    margin-bottom: 0;
+}
+div[data-groupname="repeating_mod"] .repitem:nth-of-type(3n), div[data-groupname="repeating_plugin"] .repitem:nth-of-type(3n), div[data-groupname="repeating_equipment"] .repitem:nth-of-type(3n) {
+    margin-right: 0;   
+}
+div[data-groupname="repeating_mod"], div[data-groupname="repeating_plugin"], div[data-groupname="repeating_equipment"] {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+div[data-groupname="repeating_mod"] .repitem textarea, div[data-groupname="repeating_plugin"] .repitem textarea, div[data-groupname="repeating_equipment"] .repitem textarea, div[data-groupname="repeating_drone"] .repitem textarea {
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+div[data-groupname="repeating_equipment"] .repitem label {
+    padding-right: 5px;
+}
+.sheet-drone-list {
+    width: 100%;
+}
+div[data-groupname="repeating_drone"] .repitem {
+    width: 100%;
+}
+div[data-groupname="repeating_drone"] .repitem > .sheet-flex-container:nth-of-type(2) label {
+    width: auto;
+}
+div[data-groupname="repeating_drone"] .repitem > .sheet-flex-container:nth-of-type(2) input {
+    margin-right: 10px;
+}
+div[data-groupname="repeating_drone"] .flex-container:nth-of-type(3) {
+    margin-right: 5px;
+}
+div[data-groupname="repeating_drone"] .repitem .sheet-table  {
+    margin-right: 7.5px;
+    width: calc(33.333% - 5px);
+}
+div[data-groupname="repeating_drone"] .repitem .sheet-table:last-child  {
+    margin-right: 0;
+}
+.sheet-requisition {
+    margin-bottom: 20px;
+}
+.sheet-req-type {
+    margin-bottom: 10px;
+}
+.charsheet .sheet-tab-group .sheet-row label {
+    width: 85px;
+}
+.charsheet .sheet-tab-group .sheet-row.sheet-misc label {
+    width: 110px;
+}
+.sheet-sep {
+    font-weight: 900;
+    font-size: 18px;
+}   
+div[data-groupname="repeating_equipment"] select {
+    width: auto;
+}
+div[data-groupname="repeating_equipment"] textarea {
+    width: 100%;
+}
+
+input[type=number] {
+    text-align: center;
+}
+
+input[type=text], input[type=number], select {
+    border-width: 0 0 2px;
+    border-color: #888;
+    border-radius: 0;
+    transition: border-color 0.5s;
+    padding: 4px 0;
+}
+input[type=number] {
+     padding: 4px 0 4px 15px;
+}
+
+input[type=text]:focus, input[type=number]:focus, select:focus {
+    border-color: #000000;
+    outline: none;
+}
+button[type=roll] {
+    margin-left: 7.5px !important;
+    margin-right: 0 !important;
+}
+textarea {
+    border: 2px solid #888;
+    border-radius: 0;
+    box-sizing: border-box;
+    transition: border-color 0.5s;
+}
+
+textarea:focus {
+    border: 2px solid #000;
+    outline: none;
+}
+input[name="attr_weapon_reload_reloads"] {
+    margin-left: 5px !important;
+}
+.sheet-tab-group {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+input[type=radio] {
+    margin-right: 5px;
+}
+.sheet-tab-group input[type=radio], .sheet-tab-group label {
+    display: inline-block;
+}
+.sheet-tab-group label {
+    width: auto;
+    font-size: 16px;
+    margin-bottom: 0;
+    padding-right: 20px;
+}
+.sheet-tab-group .sheet-tab {
+    width: 100%;
+}
+.sheet-tab {
+  display: none !important;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.sheet-tab h2 {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.sheet-tab h3 {
+    margin-bottom: 10px;
+    width: 100%;
+}
+.sheet-tab select {
+    width: 100px;
+}
+.sheet-tab-group .sheet-tab label {
+    padding-right: 10px;
+}
+input[value=attributes]:checked ~ .sheet-tab.sheet-attributes {
+  display: flex !important;
+}
+input[value=progression]:checked ~ .sheet-tab.sheet-progression {
+  display: flex !important;
+}
+input[value=attacks]:checked ~ .sheet-tab.sheet-attacks {
+  display: flex !important;
+}
+
+input[value=modifications]:checked ~ .sheet-tab.sheet-modifications {
+  display: flex !important;
+}
+
+input[value=plugins]:checked ~ .sheet-tab.sheet-plugins {
+  display: flex !important;
+}
+
+input[value=drones]:checked ~ .sheet-tab.sheet-drones {
+  display: flex !important;
+} 
+
+input[value=equipment]:checked ~ .sheet-tab.sheet-equipment {
+  display: flex !important;
+}
+
+/*# sourceMappingURL=styles.css.map */

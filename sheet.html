@@ -1,0 +1,559 @@
+<!--Top level file for the entire application
+Version 0.1
+Author: Matthew Austin
+-->
+<rolltemplate class="sheet-rolltemplate-challenge-normal">
+    <div class="template-container">
+        <div class="template-header">{{name}}</div>
+        <div class="template-row">Challenge: {{challenge}}</div>
+    </div>    
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-challenge-adv">
+    <div class="template-container">
+        <div class="template-header">{{name}}</div>
+        <div class="template-row">Challenge: {{challenge}} {{challengeadv}}</div>
+        </div>        
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-challenge-disadv">
+    <div class="template-container">
+        <div class="template-header">{{name}}</div>
+        <div class="template-row">Challenge: {{challenge}} {{challengeadv}}</div>
+        </div>        
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-attack-normal">
+    <div class="template-container">
+       <div class="template-header">{{name}}</div>
+        {{#challenge}}<div class="template-row">{{challenge}}</div>{{/challenge}}
+        {{#damage}}<div class="template-row">Damage: {{damage}}</div>{{/damage}}
+        {{#qualities}}<div class="template-row">Qualities: {{qualities}}</div>{{/qualities}}
+        </div>        
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-attack-adv">
+    <div class="template-container">
+       <div class="template-header">{{name}}</div>
+        {{#challenge}}<div class="template-row">{{challenge}} {{challengeadv}}</div>{{/challenge}}
+        {{#damage}}<div class="template-row">Damage: {{damage}}</div>{{/damage}}
+        {{#qualities}}<div class="template-row">Qualities: {{qualities}}</div>{{/qualities}}
+    </div>    
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-attack-disadv">
+    <div class="template-container">
+       <div class="template-header">{{name}}</div>
+        {{#challenge}}<div class="template-row">{{challenge}} {{challengedisadv}}</div>{{/challenge}}
+        {{#damage}}<div class="template-row">Damage: {{damage}}</div>{{/damage}}
+        {{#qualities}}<div class="template-row">Qualities: {{qualities}}</div>{{/qualities}}
+    </div>        
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-plugin">
+    <div class="template-header">{{name}}</div>
+    {{plugin}}<div class="template-row">Effect: {{effect}}</div>{{/plugin}}
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-modification">
+    <div class="template-header">{{name}}</div>
+    {{modification}}<div class="template-row">Name: {{name}}</div>
+                    <div class="template-row">Level: {{level}}</div>
+                    <div class="template-row">Passive: {{passive}}</div>
+                    <div class="template-row">Active: {{active}}</div>{{/modification}}
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-modification">
+    <div class="template-header">{{name}}</div>
+    {{explosive}}<div class="template-row">Name: {{name}}</div>
+                    <div class="template-row">Type: {{type}}</div>
+                    <div class="template-row">Blast Radius: {{radius}}</div>
+                    <div class="template-row">Effect: {{effect}}</div>{{/explosive}}
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-drone-actions">
+    <div class="template-header">{{name}}</div>
+    {{drone-actions}}<div class="template-row">Model: {{model}}</div>
+                    <div class="template-row">Passive: {{passive}}</div>
+                    <div class="template-row">Active: {{active}}</div>{{/drone-actions}}
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-equip">
+    <div class="template-header">{{name}}</div>
+    {{equipment}}<div class="template-row">Type: {{type}}</div>
+    <div class="template-row">Effect: {{effect}}</div>
+    {{/equipment}}
+</rolltemplate>
+<div class="page-wrapper">
+    <!--Vue templates, used to create basic html structure of elelements, do not show-->
+    <div class="character-sheet">
+        <div class="basic-information flex-container nowrap">
+            <div class="logo">
+                <img src="https://s3.amazonaws.com/files.d20.io/images/119238849/yVRqL1BoS4w8mcYx58LuBA/max.png?1586307921" alt="Undoing Ruin">
+            </div>
+            <!--Section for filling in details about character such as designation, name, etc-->
+            <div class="character-information">
+                <div class="row name flex-container no-wrap">
+                    <div class="value">
+                        <label for="attr_player_name">Player Name</label>
+                        <input type="text" name="attr_player_name" />
+                    </div>
+                    <div class="value">
+                        <label for="attr_designation">Designation</label>
+                        <input type="text" name="attr_designation" />
+                    </div>
+                    <div class="value">
+                        <label for="attr_chosen_name">Chosen Name</label>
+                        <input type="text" name="attr_chosen_name" />
+                    </div>
+                </div>
+                <div class="row info flex-container no-wrap">
+                    <div class="value">
+                        <label for="attr_os">Operating System</label>
+                        <select name="attr_os" />
+                            <option disabled selected="selected">Select an OS</option>
+                            <option value="tactical">Tactical</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="coordination">Coordination</option>
+                        </select>
+                    </div>
+                    <div class="value">
+                        <label>Protocol</label>
+                        <input type="text" name="attr_protocol_name">
+                        <input type="text" name="attr_protocol_effect">
+                    </div>
+                    <div class="value">
+                        <label for="attr_chassis">Chassis</label>
+                        <input type="text" name="attr_chassis" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="flex-container roll-type">
+                <h4>Roll Type:</h4>
+                <input type="radio" name="attr_roll-type" value="1">
+                <label for="1">Shaken</label>
+                <input type="radio" name="attr_roll-type" value="2" checked="true">
+                <label for="2">Normal</label>
+                <input type="radio" name="attr_roll-type" value="3">
+                <label for="3">Boosted</label>
+                <label>Misc. Challenge Modifier</label>
+                <input type="number" name="attr_misc_mod" value="0">
+            </div>
+            <div class="flex-container advantage">
+                <input type="radio" name="attr_adv_disadv" value="disadv">
+                <label for="1">Disadvantage</label>
+                <input type="radio" name="attr_adv_disadv" value="normal" checked="true">
+                <label for="2">Normal</label>
+                <input type="radio" name="attr_adv_disadv" value="adv">
+                <label for="1">Advantage</label>
+            </div>
+        </div>
+        <div class="container">
+            <div class="tab-group">
+                <input type="radio" name="active-tab" value="attributes" checked="true"><label for="attributes">Attributes</label></input>
+                <input type="radio" name="active-tab" value="progression"><label for="progression">Progression</label></input>
+                <input type="radio" name="active-tab" value="attacks"><label>Attacks</label></input>
+                <input type="radio" name="active-tab" value="modifications"><label>Modifications</label></input>
+                <input type="radio" name="active-tab" value="plugins"><label>Plugins</label></input>
+                <input type="radio" name="active-tab" value="drones"><label>Drones</label></input>
+                <input type="radio" name="active-tab" value="equipment"><label>Equipment</label></input>
+                <div class="tab attributes">
+                    <h2>Attributes</h2>
+                    <div class="flex-container no-wrap">
+                        <div class="table attributes flex-container">
+                            <div class="row flex-container no-wrap">
+                                <label>Speed:</label>
+                                <input type="number" name="attr_speed" min="0" max="5" value="0" />
+                                <button type="roll" name="roll_speed"
+                                    value="&{template:challenge-@{adv_disadv}} {type={Speed Challenge}} {{name=@{chosen_name}: Speed Challenge}} {{challenge=[[@{roll-type}d6+@{speed}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{speed}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{speed}+@{misc_mod}]]}}"></button>
+                            </div>
+                            <div class="row flex-container no-wrap">
+                                <label>Strength:</label>
+                                <input type="number" name="attr_strength" min="-5" max="5" value="0" />
+                                <button type="roll" name="roll_strength"
+                                    value="&{template:challenge-@{adv_disadv}} {type={Strength Challenge}} {{name=@{chosen_name}: Strength Challenge}} {{challenge=[[@{roll-type}d6+@{strength}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{strength}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{strength}+@{misc_mod}]]}}"></button>
+                            </div>
+                            <div class="row flex-container no-wrap">
+                                <label>Finesse:</label>
+                                <input type="number" name="attr_finesse" min="-5" max="5" value="0" />
+                                <button type="roll" name="roll_finesse"
+                                    value="&{template:challenge-@{adv_disadv}} {type={Finesse Challenge}} {{name=@{chosen_name}: Finesse Challenge}} {{challenge=[[@{roll-type}d6+@{finesse}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{finesse}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{finesse}+@{misc_mod}]]}}"></button>
+                            </div>
+                            <div class="row flex-container no-wrap">
+                                <label>Sensory:</label>
+                                <input type="number" name="attr_sensory" min="-5" max="5" value="0" />
+                                <button type="roll" name="roll_sensory"
+                                    value="&{template:challenge-@{adv_disadv}} {type={Sensory Challenge}} {{name=@{chosen_name}: Sensory Challenge}} {{challenge=[[@{roll-type}d6+@{sensory}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{sensory}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{sensory}+@{misc_mod}]]}}"></button>
+                            </div>
+                            <div class="row flex-container no-wrap">
+                                <label>Processor:</label>
+                                <input type="number" name="attr_processor" min="-5" max="5" value="0" />
+                                <button type="roll" name="roll_processor"
+                                    value="&{template:challenge-@{adv_disadv}} {type={Processor Challenge}} {{name=@{chosen_name}: Processor Challenge}} {{challenge=[[@{roll-type}d6+@{processor}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{processor}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{processor}+@{misc_mod}]]}}"></button>
+                            </div>
+                        </div>
+                        <div class="table flex-container">
+                            <div class="row health flex-container no-wrap">
+                                <label>Armor:</label>
+                                <input type="number" name="attr_armor" min="0" max="5" value="0"/>
+                            </div>
+                            <div class="row flex-container no-wrap">
+                                <label>Shielding:</label>
+                                <input class="input-small" type="number" min="0" value="0" name="attr_shielding_current" /><span class="sep">&#47;</span>
+                                <input class="input-small" type="number" min="0" value="0" name="attr_shielding_max" />
+                            </div>
+                            <div class="row flex-container no-wrap">
+                                <label>Integrity:</label>
+                                <input class="input-small" type="number" min="0" value="0" name="attr_integrity_current" /><span class="sep">&#47;</span>
+                                <input class="input-small" type="number" min="0" value="0" name="attr_integrity_max" />
+                            </div>
+                            <div class="row flex-container no-wrap">
+                                <label>Security:</label>
+                                <input class="input-small" type="number" min="0" value="0" name="attr_security_current" /><span class="sep">&#47;</span>
+                                <input class="input-small" type="number" min="0" value="0" name="attr_security_max" />
+                            </div>
+                            <div class="row flex-container no-wrap">
+                                <label>Energy:</label>
+                                <input class="input-small" type="number" min="0" value="0" name="attr_energy_current" /><span class="sep">&#47;</span>
+                                <input class="input-small" type="number" min="0" value="0" name="attr_energy_max" />
+                            </div>
+                        </div>
+                        <div class="table flex-container">
+                            <div class="row misc flex-container no-wrap">
+                                <label>Action Points:</label>
+                                <input type="number" name="attr_ap" min="3" max="5" value="3"/>
+                            </div>
+                            <div class="row misc flex-container no-wrap">
+                                <label>Divergence:</label>
+                                <input type="number" name="attr_divergence" min="0" max="5" value="0"/>
+                                <button type="roll" name="roll_divergence"
+                                    value="&{template:challenge-@{adv_disadv}} {type={Divergence Challenge}} {{name=@{chosen_name}: Divergence Challenge}} {{challenge=[[@{roll-type}d6+@{divergence}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{divergence}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{divergence}+@{misc_mod}]]}}"></button>
+                            </div>
+                            <div class="row misc flex-container no-wrap">
+                                <label>Clearance:</label>
+                                <input type="number" name="attr_clearance" min="1" max="5" value="1"/>
+                                <button type="roll" name="roll_clearance"
+                                    value="&{template:challenge-@{adv_disadv}} {type={Clearance Challenge}} {{name=@{chosen_name}: Clearance Challenge}} {{challenge=[[@{roll-type}d6+@{clearance}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{clearance}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{clearance}+@{misc_mod}]]}}"></button>
+                            </div>
+                            <div class="row misc flex-container no-wrap">
+                                <label>Guard:</label>
+                                <input type="number" min="0" value="0" name="attr_guard" />
+                            </div>
+                            <div class="row misc flex-container no-wrap">
+                                <label>Firewall:</label>
+                                <input type="number" min="0" value="0" name="attr_firewall" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab progression flex-container">
+                    <h2>Progression</h2>
+                    <div class="flex-container">
+                        <div class="table requisition">
+                            <h3>Requisition</h3>
+                            <div class="req-type">
+                                <label>Initiative Requisition:</label>
+                                <input type="number" min="10" value="10"/>
+                            </div>
+                            <div class="req-type">
+                                <label>Administrator Requisition:</label>
+                                <input type="number" min="0" value="0"/>
+                            </div>
+                            <div class="req-type">
+                                <label>Faction Requisition:</label>
+                                <input type="text" name="attr_faction_name" />
+                                <input type="number" min="0" value="0"/>
+                            </div>
+                        </div>
+                        <div class="table missions">
+                            <h3>Mission History</h3>
+                            <h4>Missions Cleared:</h4>
+                            <div class="flex-container">
+                                <label>1</label>
+                                <input type="number" name="attr_diff_1_cleared" min="0" value="0">
+                                <label>2</label>
+                                <input type="number" name="attr_diff_2_cleared" min="0" value="0">
+                                <label>3</label>
+                                <input type="number" name="attr_diff_3_cleared" min="0" value="0">
+                                <label>4</label>
+                                <input type="number" name="attr_diff_4_cleared" min="0" value="0">
+                                <label>5</label>
+                                <input type="number" name="attr_diff_5_cleared" min="0" value="0">
+                            </div>
+                            <div class="flex-container">
+                                <h4>Missions Failed:</h4>
+                                <input type="number" name="attr_missions_failed" min="0" value="0">
+                            </div>
+                        </div>
+                        <div class="table traits">
+                            <h3>Personality Traits</h3>
+                            <fieldset class="repeating_trait">
+                                <input type="text" name="attr_trait">
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>    
+                <div class="tab attacks flex-container">
+                    <h2>Attacks</h2>
+                    <div class="weapons-and-attacks">
+                        <!--unarmed-->
+                        <h3>Unarmed</h3>
+                        <div class="flex-container">
+                            <div class="row">
+                                <label>Type:</label>
+                                <select name="attr_unarmed_attr">
+                                    <option value="" disabled selected>Select Attribute</option>
+                                    <option value="@{strength}">Strength</option>
+                                    <option value="@{finesse}">Finesse</option>
+                                </select>
+                                <label>To Hit:</label>
+                                <input type="number" name="attr_unarmed_tohit" value="@{unarmed_attr}" disabled="true">
+                                <label>Power Bonus:</label>
+                                <input type="number" name="attr_unarmed_power" min="0" max="5" value="0"/>
+                                <label>Qualities:</label>
+                                <input type="text" name="attr_unarmed_qualities">
+                                  <button type="roll" name="roll_unarmed"
+                                    value="&{template:attack-@{adv_disadv}} {type=Unarmed} {{name=@{chosen_name}: Unarmed}} {{challenge=[[@{roll-type}d6+@{unarmed_tohit}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{unarmed_tohit}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{unarmed_tohit}+@{misc_mod}]]}} {{damage=[[@{unarmed_attr}+@{unarmed_power}]]}} {{qualities=@{unarmed_qualities}}}"></button>
+                            </div>
+                        </div>
+                        
+                        <!--hacking-->
+                        <h3>Hacking and Network</h3>
+                        <div class="flex-container">
+                            <div class="row">
+                                <label>Network Range:</label>
+                                <input type="number" name="attr_network_range" min="1" value="1" />
+                                </select>
+                                <label>Challenge Bonus:</label>
+                                <input type="number" name="attr_network_challenge_bonus" min="@{processor}" value="@{processor}" disabled="true"/>
+                                <label>Extra Hacking Damage:</label>
+                                <input type="number" name="attr_hacking_damage" min="0" value="0" />
+                                <button type="roll" name="roll_hacking"
+                                    value="&{template:attack-@{adv_disadv}} {type=Hacking} {{name=@{chosen_name}: Hacking}} {{challenge=[[@{roll-type}d6+@{network_challenge_bonus}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{network_challenge_bonus}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{network_challenge_bonus}+@{misc_mod}]]}} {{damage=[[@{hacking_damage}+@{processor}]]}}+"></button>
+                            </div>
+                        </div>
+                        <!--weapons-->
+                        <h3>Weapons</h3>
+                        <fieldset class="repeating_attack flex-container">
+                            <div class="row">
+                                <label>Name:</label><input type="text" name="attr_weapon_name"/>
+                                <label>Type:</label><select name="attr_weapon_type">
+                                    <option value="melee" selected="selected">Melee</option>
+                                    <option value="ranged">Ranged</option>
+                                </select>
+                                <label>Attribute:</label>
+                                <select name="attr_weapon_attr">
+                                    <option value="" disabled selected>Select Attribute</option>
+                                    <option value="@{strength}">Strength</option>
+                                    <option value="@{finesse}">Finesse</option>
+                                    <option value="@{sensory}">Sensory</option>
+                                </select>
+                                <label>Effective Range:</label><input type="number" name="attr_weapon_range" min="0" value="0">
+                                <button type="roll" name="roll_weapon"
+                                    value="&{template:attack-@{adv_disadv}} {type={@{weapon_name}}} {{name=@{chosen_name}: @{weapon_name}}} {{challenge=[[@{roll-type}d6+@{weapon_tohit}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{weapon_tohit}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{weapon_tohit}+@{misc_mod}]]}} {{damage=[[@{weapon_attr}+@{weapon_power}]]}} {{qualities=@{weapon_qualities}}}"></button>
+                            </div>
+                            <div class="row">
+                                <label>Ammunition:</label>
+                                <input type="number" name="attr_weapon_reload_current" min="0" value="0"/><span class="sep">&#47;</span><input type="number" name="attr_weapon_reload_total" min="0" value="0"/><input type="number" name="attr_weapon_reload_reloads" min="0" value="0"/> 
+                                <label>Cost:</label>
+                                <input type="number" name="attr_weapon_cost" min="0" value="0"/>
+                                <label>To Hit:</label>
+                                <input type="number" name="attr_weapon_tohit" value="@{weapon_attr}" disabled="true">
+                                <label>Power Bonus:</label>
+                                <input type="number" name="attr_weapon_power" min="0" max="5" value="0"/>
+                            </div>
+                            <div class="row">
+                                <label>Qualities:</label>
+                                <input type="text" name="attr_weapon_qualities">
+                            </div>
+                        </fieldset>
+                        <h3>Explosives</h3>
+                        <fieldset class="repeating_explosive flex-container">
+                            <div class="row">
+                                <label>Name:</label>
+                                <input type="text" name="attr_explosive_name">
+                                <button type="roll" name="output_explosive"
+                                        value="&{template:default} {{name=@{chosen_name}: @{explosive_name}}} {{type=@{explosive_type}}}  {{radius=@{explosive_radius}}} {{effect=@{explosive_effect}}}"></button>
+                                <label>Type:</label>
+                                <select name="attr_explosive_type">
+                                    <option value="" disabled selected>Select type</option>
+                                    <option value="Explosive Device">Explosive Device</option>
+                                    <option value="Grenade">Grenade</option>
+                                    <option value="Rocket">Rocket</option>
+                                </select>
+                                <label>Blast Radius:</label>
+                                <input type="text" name="attr_explosive_radius"/>
+                            </div>    
+                            <label>Effect:</label>
+                            <textarea name="attr_explosive_effect"></textarea>
+                            <div class="row">
+                                <label>#:</label>
+                                <input type="number" name="attr_explosive_number" min="1" value="1"/>
+                                <label>Cost:</label>
+                                <input type="number" name="attr_explosive_cost" min="0" value="0"/>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="tab modifications">
+                    <h2>Modifications</h2>
+                    <h3>Hard Points</h3>
+                    <div class="hard-points flex-container no-wrap">
+                        <div class="hard-point">
+                            <label>Head:</label><input type="number" name="attr_hp_head" min="0" value="0" />
+                        </div>
+                        <div class="hard-point">
+                            <label>Chest:</label><input type="number" name="attr_hp_chest" min="0" value="0" />
+                        </div>
+                        <div class="hard-point">
+                            <label>Arms:</label><input type="number" name="attr_hp_arms" min="0" value="0" />
+                        </div>
+                        <div class="hard-point">
+                            <label>Legs:</label><input type="number" name="attr_hp_legs" min="0" value="0" />
+                        </div>
+                    </div>
+                    <h3>Installed Modifications</h3>
+                    <div class="modifications">
+                        <fieldset class="repeating_mod flex-container ">
+                            <div class="row">
+                                <div class="flex-container no-wrap">
+                                    <label>Name:</label><input type="text" name="attr_mod_name" />
+                                    <button type="roll" name="drone_roll_speed"
+                                        value="&{template:default} {type={Modification}} {{name=@{chosen_name}: @{mod_name}}} {{level=@{mod_level}}} {{passive=@{mod_passive}}} {{active=@{mod_active}}}"></button>
+                                </div>
+                                <div class="flex-container">
+                                    <label>Hard Point:</label>
+                                    <select name="attr_mod_hp">
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="head">Head</option>
+                                        <option value="chest">Chest</option>
+                                        <option value="arms">Arms</option>
+                                        <option value="legs">Legs</option>
+                                    </select>
+                                    <label>Level:</label><input type="number" name="attr_mod_level" min="1" max="3" value="1"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label>Passive:</label><textarea name="attr_mod_passive"></textarea>
+                            </div>
+                            <div class="row">
+                                <label>Active:</label><textarea name="attr_mod_active"></textarea>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="tab plugins flex-container">
+                    <h2>Plugins</h2>
+                    <div class="plugins">
+                        <fieldset class="repeating_plugin flex-container">
+                            <div class="row-no-wrap">
+                                <label>Name:</label><input type="text" name="attr_plug_name" />
+                                <button type="roll" class="message" name="roll_plugin"
+                                value="&{template:default} {{name=@{chosen_name}: @{plug_name}}} {{plugin=@{plug_effect}}}"></button>
+                            </div>
+                            <div class="row">
+                                <label>Effect:</label><textarea name="attr_plug_effect"></textarea>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="tab drones flex-container">
+                    <h2>Drones</h2>
+                    <div class="drone-list">
+                        <fieldset class="repeating_drone flex-container">
+                            <div class="row flex-container">
+                                <label>Name:</label>
+                                <input type="text" name="attr_drone_name"/>
+                                <label>Model:</label>
+                                <input type="text" name="attr_drone_model"/>
+                                 <button type="roll" name="drone-actions"
+                                            value="&{template:default} {{name=@{drone_name}: Actions}} {{model=@{drone_model}}} {{passive=@{drone_passive}}} {{active=@{drone_action}}}"></button>
+                            </div>
+                            <div class="flex-container no-wrap">
+                                <div class="table flex-container">
+                                    <div class="row flex-container">
+                                         <div class="row flex-container no-wrap">
+                                            <label>Speed:</label>
+                                            <input type="number" name="attr_drone_speed" min="-5" max="5" value="0" />
+                                            <button type="roll" name="drone_roll_speed"
+                                                value="&{template:challenge-@{adv_disadv}} {type={Speed Challenge}} {{name=@{drone_name}: Speed Challenge}} {{challenge=[[@{roll-type}d6+@{drone_speed}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{drone_speed}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{drone_speed}+@{misc_mod}]]}}"></button>
+                                        </div>
+                                        <div class="row flex-container no-wrap">
+                                            <label>Strength:</label>
+                                            <input type="number" name="attr_drone_strength" min="-5" max="5" value="0" />
+                                            <button type="roll" name="drone_roll_strength"
+                                                value="&{template:challenge-@{adv_disadv}} {type={Strength Challenge}} {{name=@{drone_name}: Strength Challenge}} {{challenge=[[@{roll-type}d6+@{drone_strength}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{drone_strength}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{drone_strength}+@{misc_mod}]]}}"></button>
+                                        </div>
+                                        <div class="row flex-container no-wrap">
+                                            <label>Finesse:</label>
+                                            <input type="number" name="attr_drone_finesse" min="-5" max="5" value="0" />
+                                            <button type="roll" name="drone_roll_finesse"
+                                                value="&{template:challenge-@{adv_disadv}} {type={Finesse Challenge}} {{name=@{drone_name}: Finesse Challenge}} {{challenge=[[@{roll-type}d6+@{drone_finesse}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{drone_finesse}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{drone_finesse}+@{misc_mod}]]}}"></button>
+                                        </div>
+                                        <div class="row flex-container no-wrap">
+                                            <label>Sensory:</label>
+                                            <input type="number" name="attr_drone_sensory" min="-5" max="5" value="0" />
+                                            <button type="roll" name="drone_roll_sensory"
+                                                value="&{template:challenge-@{adv_disadv}} {type={Sensory Challenge}} {{name=@{drone_name}: Sensory Challenge}} {{challenge=[[@{roll-type}d6+@{drone_sensory}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{drone_sensory}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{drone_sensory}+@{misc_mod}]]}}"></button>
+                                        </div>
+                                        <div class="row flex-container no-wrap">
+                                            <label>Processor:</label>
+                                            <input type="number" name="attr_drone_processor" min="-5" max="5" value="0" />
+                                            <button type="roll" name="drone_roll_processor"
+                                                value="&{template:challenge-@{adv_disadv}} {type={Processor Challenge}} {{name=@{drone_name}: Processor Challenge}} {{challenge=[[@{roll-type}d6+@{drone_processor}+@{misc_mod}]]}} {{challengeadv=[[@{roll-type}d6+@{drone_processor}+@{misc_mod}]]}} {{challengedisadv=[[@{roll-type}d6+@{drone_processor}+@{misc_mod}]]}}"></button>
+                                        </div>
+                                    </div>
+                                </div>    
+                                <div class="table">
+                                    <div class="row health flex-container no-wrap">
+                                        <label>Armor:</label>
+                                        <input type="number" name="attr_armor" min="0" max="5" value="0"/>
+                                    </div>
+                                    <div class="row flex-container no-wrap">
+                                        <label>Shielding:</label>
+                                            <input class="input-small" type="number" min="0" value="0" name="attr_drone_shielding_current" />&#47;
+                                        <input class="input-small" type="number" min="0" value="0" name="attr_drone_shielding_max" />
+                                    </div>
+                                    <div class="row flex-container no-wrap">
+                                        <label>Integrity:</label>
+                                        <input class="input-small" type="number" min="0" value="0" name="attr_drone_integrity_current" />&#47;
+                                        <input class="input-small" type="number" min="0" value="0" name="attr_drone_integrity_max" />
+                                    </div>
+                                     <div class="row flex-container no-wrap">
+                                        <label>Guard:</label>
+                                        <input class="input-small" type="number" min="0" value="0" name="attr_drone_guard" />
+                                    </div>
+                                </div>
+                                <div class="table">
+                                    <div class="row">
+                                        <label>Passive:</label>
+                                        <textarea name="attr_drone_passive"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <label>Action:</label>
+                                        <textarea name="attr_drone_action"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="tab equipment flex-container">
+                    <h2>Equipment and Requisition:</h2>
+                    <h3>Gadgets and Equipment</h3>
+                    <fieldset class="repeating_equipment">
+                        <div class="row flex-container no-wrap">
+                            <label>Name:</label>
+                            <input type="text" name="attr_equip_name" />
+                            <button type="roll" class="message" name="roll_equip"
+                                value="&{template:default} {{name=@{chosen_name}: @{equip_name}}} {{type=@{equip_type}}} {{effect=@{equip_effect}}}"></button>
+                        </div>
+                        <div class="row flex-container no-wrap">
+                            <label>Equipment Type:</label>
+                            <select name="attr_equip_type">
+                                <option value="" disabled selected>Select Type</option>
+                                <option value="gadget">Gadget</option>
+                                <option value="malware">Malware Package</option>
+                                <option value="ammo">Ammunition</option>
+                            </select>
+                        </div>
+                        <textarea name="attr_equip_effect"></textarea>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="small">&copy; Matt Austin 2020</p>
+</div>
